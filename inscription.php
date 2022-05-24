@@ -18,7 +18,7 @@
 
 <body class="hold-transition register-page">
 
-<div class="register-box">
+<div class="col-sm-5">
 
     <div class="card card-outline card-primary">
 
@@ -30,7 +30,17 @@
 
         <?php
 
-        var_dump($_GET);
+        $erreurs = array();
+
+        $donnees = array();
+
+        if (isset($_GET["erreurs"]) && !empty($_GET["erreurs"])) {
+            $erreurs = json_decode($_GET["erreurs"], true);
+        }
+
+        if (isset($_GET["donnees"]) && !empty($_GET["donnees"])) {
+            $donnees = json_decode($_GET["donnees"], true);
+        }
 
         ?>
 
@@ -40,7 +50,8 @@
 
             <form action="inscription-traitement.php" method="post" novalidate>
 
-                <div class="col-sm-12">
+                <!-- Le champs nom -->
+                <div class="col-sm-12 mb-3">
 
                     <label for="inscription-nom">
 
@@ -50,99 +61,11 @@
 
                     </label>
 
-                    <div class="input-group mb-3">
+                    <div class="input-group">
 
                         <input type="text" name="nom" id="inscription-nom" class="form-control"
-                               placeholder="Veuillez entrer votre nom" required>
-
-                        <div class="input-group-append">
-
-                            <div class="input-group-text">
-
-                                <span class="fas fa-user"></span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-sm-12">
-
-                    <label for="inscription-prenom">
-
-                        Prénom:
-
-                        <span class="text-danger">(*)</span>
-
-                    </label>
-
-                    <div class="input-group mb-3">
-
-                        <input type="text" name="prenom" id="inscription-prenom" class="form-control"
-                               placeholder="Veuillez entrer votre prénom" required>
-
-                        <div class="input-group-append">
-
-                            <div class="input-group-text">
-
-                                <span class="fas fa-user"></span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-sm-12">
-
-                    <label for="inscription-sexe">
-
-                        Sexe:
-
-                        <span class="text-danger">(*)</span>
-
-                    </label>
-
-                    <div class="form-group clearfix">
-
-                        <div class="icheck-primary d-inline">
-
-                            <input type="radio" name="sexe" checked="" id="sexe-m">
-
-                            <label for="sexe-m">M</label>
-
-                        </div>
-
-                        <div class="icheck-primary d-inline">
-
-                            <input type="radio" name="sexe" checked="" id="sexe-f">
-
-                            <label for="sexe-f">F</label>
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-sm-12">
-
-                    <label for="inscription-date-naissance">
-
-                        Date de naissance:
-
-                        <span class="text-danger">(*)</span>
-
-                    </label>
-
-                    <div class="input-group mb-3">
-
-                        <input type="date" name="date-naissance" id="inscription-date-naissance" class="form-control"
-                               placeholder="Veuillez entrer votre date de naissance"
+                               placeholder="Veuillez entrer votre nom"
+                               value="<?= (isset($donnees["nom"]) && !empty($donnees["nom"])) ? $donnees["nom"] : ""; ?>"
                                required>
 
                         <div class="input-group-append">
@@ -157,9 +80,155 @@
 
                     </div>
 
+                    <span class="text-danger">
+
+                        <?php
+
+                        if (isset($erreurs["nom"]) && !empty($erreurs["nom"])) {
+                            echo $erreurs["nom"];
+                        }
+
+                        ?>
+
+                    </span>
+
                 </div>
 
-                <div class="col-sm-12">
+                <!-- Le champs prenom -->
+                <div class="col-sm-12 mb-3">
+
+                    <label for="inscription-prenom">
+
+                        Prénom:
+
+                        <span class="text-danger">(*)</span>
+
+                    </label>
+
+                    <div class="input-group">
+
+                        <input type="text" name="prenom" id="inscription-prenom" class="form-control"
+                               placeholder="Veuillez entrer votre prénom"
+                               value="<?= (isset($donnees["nom"]) && !empty($donnees["nom"])) ? $donnees["nom"] : ""; ?>"
+                               required>
+
+                        <div class="input-group-append">
+
+                            <div class="input-group-text">
+
+                                <span class="fas fa-user"></span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <span class="text-danger">
+
+                        <?php
+
+                        if (isset($erreurs["prenom"]) && !empty($erreurs["prenom"])) {
+                            echo $erreurs["prenom"];
+                        }
+
+                        ?>
+
+                    </span>
+
+                </div>
+
+                <!-- Le champs sexe -->
+                <div class="col-sm-12 mb-3">
+
+                    <label for="inscription-sexe">
+
+                        Sexe:
+
+                        <span class="text-danger">(*)</span>
+
+                    </label>
+
+                    <div class="form-group clearfix">
+
+                        <div class="icheck-primary d-inline">
+
+                            <input type="radio" name="sexe" checked="" id="sexe-m" value="M">
+
+                            <label for="sexe-m">M</label>
+
+                        </div>
+
+                        <div class="icheck-primary d-inline">
+
+                            <input type="radio" name="sexe" checked="" id="sexe-f" value="F">
+
+                            <label for="sexe-f">F</label>
+
+                        </div>
+                    </div>
+
+
+                    <span class="text-danger">
+
+                        <?php
+
+                        if (isset($erreurs["sexe"]) && !empty($erreurs["sexe"])) {
+                            echo $erreurs["sexe"];
+                        }
+
+                        ?>
+
+                    </span>
+
+                </div>
+
+                <!-- Le champs date de naissance -->
+                <div class="col-sm-12 mb-3">
+
+                    <label for="inscription-date-naissance">
+
+                        Date de naissance:
+
+                        <span class="text-danger">(*)</span>
+
+                    </label>
+
+                    <div class="input-group mb-3">
+
+                        <input type="date" name="date-naissance" id="inscription-date-naissance" class="form-control"
+                               placeholder="Veuillez entrer votre date de naissance"
+                               value="<?= (isset($donnees["date-naissance"]) && !empty($donnees["date-naissance"])) ? $donnees["date-naissance"] : ""; ?>"
+                               required>
+
+                        <div class="input-group-append">
+
+                            <div class="input-group-text">
+
+                                <span class="fas fa-user"></span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <span class="text-danger">
+
+                        <?php
+
+                        if (isset($erreurs["date-naissance"]) && !empty($erreurs["date-naissance"])) {
+                            echo $erreurs["date-naissance"];
+                        }
+
+                        ?>
+
+                    </span>
+
+                </div>
+
+                <!-- Le champs email -->
+                <div class="col-sm-12 mb-3">
 
                     <label for="inscription-email">
 
@@ -173,6 +242,7 @@
 
                         <input type="email" name="email" id="inscription-email" class="form-control"
                                placeholder="Veuillex entrer votre address email"
+                               value="<?= (isset($donnees["email"]) && !empty($donnees["email"])) ? $donnees["email"] : ""; ?>"
                                required>
 
                         <div class="input-group-append">
@@ -187,9 +257,22 @@
 
                     </div>
 
+                    <span class="text-danger">
+
+                        <?php
+
+                        if (isset($erreurs["email"]) && !empty($erreurs["email"])) {
+                            echo $erreurs["email"];
+                        }
+
+                        ?>
+
+                    </span>
+
                 </div>
 
-                <div class="col-sm-12">
+                <!-- Le champs nom d'utilisateur -->
+                <div class="col-sm-12 mb-3">
 
                     <label for="inscription-nom-utilisateur">
 
@@ -203,6 +286,7 @@
 
                         <input type="text" name="nom-utilisateur" id="inscription-nom-utilisateur" class="form-control"
                                placeholder="Veuillez entrer votre nom d'utilisateur"
+                               value="<?= (isset($donnees["nom-utilisateur"]) && !empty($donnees["nom-utilisateur"])) ? $donnees["nom-utilisateur"] : ""; ?>"
                                required>
 
                         <div class="input-group-append">
@@ -217,9 +301,22 @@
 
                     </div>
 
+                    <span class="text-danger">
+
+                        <?php
+
+                        if (isset($erreurs["nom-utilisateur"]) && !empty($erreurs["nom-utilisateur"])) {
+                            echo $erreurs["nom-utilisateur"];
+                        }
+
+                        ?>
+
+                    </span>
+
                 </div>
 
-                <div class="col-sm-12">
+                <!-- Le champs mot de passe -->
+                <div class="col-sm-12 mb-3">
 
                     <label for="inscription-mot-passe">
 
@@ -232,7 +329,9 @@
                     <div class="input-group mb-3">
 
                         <input type="password" name="mot-passe" id="inscription-mot-passe" class="form-control"
-                               placeholder="Veuillez entrer votre mot de passe">
+                               placeholder="Veuillez entrer votre mot de passe"
+                               value="<?= (isset($donnees["mot-passe"]) && !empty($donnees["mot-passe"])) ? $donnees["mot-passe"] : ""; ?>"
+                               required>
 
                         <div class="input-group-append">
 
@@ -246,9 +345,22 @@
 
                     </div>
 
+                    <span class="text-danger">
+
+                        <?php
+
+                        if (isset($erreurs["mot-passe"]) && !empty($erreurs["mot-passe"])) {
+                            echo $erreurs["mot-passe"];
+                        }
+
+                        ?>
+
+                    </span>
+
                 </div>
 
-                <div class="col-sm-12">
+                <!-- Le champs retapez mot de passe -->
+                <div class="col-sm-12 mb-3">
 
                     <label for="inscription-retapez-mot-passe">
 
@@ -261,7 +373,9 @@
                     <div class="input-group mb-3">
 
                         <input type="password" name="retapez-mot-passe" id="inscription-retapez-mot-passe"
-                               class="form-control" placeholder="Veuillez retaper votre mot de passe">
+                               class="form-control" placeholder="Veuillez retaper votre mot de passe"
+                               value="<?= (isset($donnees["retapez-mot-passe"]) && !empty($donnees["retapez-mot-passe"])) ? $donnees["retapez-mot-passe"] : ""; ?>"
+                               required>
 
                         <div class="input-group-append">
 
@@ -274,6 +388,18 @@
                         </div>
 
                     </div>
+
+                    <span class="text-danger">
+
+                        <?php
+
+                        if (isset($erreurs["retapez-mot-passe"]) && !empty($erreurs["retapez-mot-passe"])) {
+                            echo $erreurs["retapez-mot-passe"];
+                        }
+
+                        ?>
+
+                    </span>
 
                 </div>
 
