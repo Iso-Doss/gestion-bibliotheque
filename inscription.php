@@ -34,6 +34,8 @@
 
         $donnees = array();
 
+        $message = array();
+
         if (isset($_GET["erreurs"]) && !empty($_GET["erreurs"])) {
             $erreurs = json_decode($_GET["erreurs"], true);
         }
@@ -42,9 +44,35 @@
             $donnees = json_decode($_GET["donnees"], true);
         }
 
+        if (isset($_GET["message"]) && !empty($_GET["message"])) {
+            $message = json_decode($_GET["message"], true);
+        }
+
         ?>
 
         <div class="card-body">
+
+        <?php
+
+            if(isset($message["statut"]) && 0 == $message["statut"]){
+
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?= $message["message"]; ?>
+                    </div>
+                <?php
+
+            }else if(isset($message["statut"]) && 1 == $message["statut"]){
+
+                ?>
+                    <div class="alert alert-success" role="alert">
+                        <?= $message["message"]; ?>
+                    </div>
+                <?php
+                
+            }
+
+        ?>
 
             <p class="login-box-msg">Enregistrer un utilisateur </p>
 
