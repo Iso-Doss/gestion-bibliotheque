@@ -58,7 +58,6 @@ if (isset($_POST["retapez-mot-passe"]) && !empty($_POST["retapez-mot-passe"])) {
 
 if (empty($erreurs)) {
 
-
     if ($donnees["mot-passe"] != $donnees["retapez-mot-passe"]) {
 
         $erreurs["mot-passe"] = $erreurs["retapez-mot-passe"] = "Les mots de passe ne sont pas identitque. Veuillez le réesayer.";

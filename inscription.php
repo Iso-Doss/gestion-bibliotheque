@@ -1,3 +1,15 @@
+<?php
+
+include 'function.php';
+
+$user_connected = check_if_user_conneted();
+
+if($user_connected){
+    header("location: dashboard.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
