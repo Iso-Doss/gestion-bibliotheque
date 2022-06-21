@@ -22,30 +22,30 @@ if (isset($_POST["mot-passe"]) && !empty($_POST["mot-passe"])) {
 
 if (empty($erreurs)) {
 
-        $user = check_if_user_exist($donnees["email-nom-utilisateur"], $donnees["mot-passe"]);
+    $user = check_if_user_exist($donnees["email-nom-utilisateur"], $donnees["mot-passe"]);
 
-        if(isset($user) && !empty($user) && is_array($user)){
+    if (isset($user) && !empty($user) && is_array($user)) {
 
-            if(0 == $user["est_actif"]){
-
-                $message_success["statut"] = 0;
-                $message_success["message"] = "Oups! Votre compte n'est actif pour le moment. Veuillez nous contactez.";
-
-            }else{
-
-                setcookie("info_utilisateur", json_encode($user));
-
-                $message_success["statut"] = 1;
-                $message_success["message"] = "Connexion éffectué avec succès.";
-
-            }
-
-        }else{
+        if (0 == $user["est_actif"]) {
 
             $message_success["statut"] = 0;
-            $message_success["message"] = "Oups! Email / mot de passe incorrect. Veuillez réessayer.";
+            $message_success["message"] = "Oups! Votre compte n'est actif pour le moment. Veuillez nous contactez.";
+
+        } else {
+
+            setcookie("info_utilisateur", json_encode($user));
+
+            $message_success["statut"] = 1;
+            $message_success["message"] = "Connexion éffectué avec succès.";
 
         }
+
+    } else {
+
+        $message_success["statut"] = 0;
+        $message_success["message"] = "Oups! Email / mot de passe incorrect. Veuillez réessayer.";
+
+    }
 
 }
 

@@ -4,7 +4,7 @@ include 'function.php';
 
 $user_connected = check_if_user_conneted();
 
-if($user_connected){
+if ($user_connected) {
     header("location: dashboard.php");
 }
 
@@ -64,27 +64,27 @@ if($user_connected){
 
         <div class="card-body">
 
-        <?php
+            <?php
 
-            if(isset($message["statut"]) && 0 == $message["statut"]){
-
-                ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?= $message["message"]; ?>
-                    </div>
-                <?php
-
-            }else if(isset($message["statut"]) && 1 == $message["statut"]){
+            if (isset($message["statut"]) && 0 == $message["statut"]) {
 
                 ?>
-                    <div class="alert alert-success" role="alert">
-                        <?= $message["message"]; ?>
-                    </div>
+                <div class="alert alert-danger" role="alert">
+                    <?= $message["message"]; ?>
+                </div>
                 <?php
-                
+
+            } else if (isset($message["statut"]) && 1 == $message["statut"]) {
+
+                ?>
+                <div class="alert alert-success" role="alert">
+                    <?= $message["message"]; ?>
+                </div>
+                <?php
+
             }
 
-        ?>
+            ?>
 
             <p class="login-box-msg">Enregistrer un utilisateur </p>
 

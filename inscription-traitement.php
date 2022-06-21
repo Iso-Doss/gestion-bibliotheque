@@ -62,7 +62,7 @@ if (empty($erreurs)) {
 
         $erreurs["mot-passe"] = $erreurs["retapez-mot-passe"] = "Les mots de passe ne sont pas identitque. Veuillez le réesayer.";
 
-    } else if(!filter_var($donnees["email"], FILTER_VALIDATE_EMAIL)){
+    } else if (!filter_var($donnees["email"], FILTER_VALIDATE_EMAIL)) {
         $erreurs["email"] = "Cette adresse mail n'est pas une adresse mail valide. Veuillez le changez.";
     }
 
@@ -71,18 +71,18 @@ if (empty($erreurs)) {
 
 $check_email_exist_in_db = check_email_exist_in_db($donnees["email"]);
 
-if($check_email_exist_in_db){
+if ($check_email_exist_in_db) {
     $erreurs["email"] = "Cette adresse mail est déja utilisé. Veuillez le changez.";
 }
 
 $check_user_name_exist_in_db = check_user_name_exist_in_db($donnees["nom-utilisateur"]);
 
-if($check_user_name_exist_in_db){
+if ($check_user_name_exist_in_db) {
     $erreurs["nom-utilisateur"] = "Ce nom d'utilisateur est déja utilisé. Veuillez le changez.";
 }
 
 
-if(empty($erreurs)){
+if (empty($erreurs)) {
     $db = connect_db();
 
     // Ecriture de la requête
@@ -103,10 +103,10 @@ if(empty($erreurs)){
     ]);
 
 
-    if($resultat){
+    if ($resultat) {
         $message_success["statut"] = 1;
         $message_success["message"] = "Inscription éffectué avec succès.";
-    }else{
+    } else {
 
         $message_success["statut"] = 0;
         $message_success["message"] = "Oups! Une erreure s'est produite lors de l'inscription. Veuillez réesayé";
