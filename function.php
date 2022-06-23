@@ -210,6 +210,10 @@ function router()
                 include "auteurs/ajout-auteur.php";
                 break;
 
+            case "ajout-auteur-traitement":
+                include "auteurs/ajout-auteur-traitement.php";
+                break;
+
             case "liste-domaines":
                 include "liste-domaines.php";
                 break;
@@ -228,4 +232,72 @@ function router()
         include "default-dashboard.php";
 
     }
+}
+
+/**
+ * Cett fonction permet de d'ajouter un auteur a la base de données.
+ * 
+ * @param string $nom_auteur Le nom de l'auteur.
+ * 
+ * @return bool $ajout_auteur Le resultat de l'ajout de l'auteur.
+ */
+function ajout_auteur(string $nom_auteur): bool  {
+
+    $ajout_auteur = false;
+
+    if(isset($nom_auteur) && !empty($nom_auteur)){
+
+        $db = connect_db();
+
+        // Ecriture de la requête
+        $requette = 'INSERT INTO auteur (nom_aut) VALUES (:nom_aut);';
+
+        // Préparation
+        $inserer_auteur = $db->prepare($requette);
+
+        // Exécution ! La recette est maintenant en base de données
+        $resultat = $inserer_auteur->execute([
+            'nom_aut' => $nom_auteur
+        ]);
+
+
+        if ($resultat) {
+            $ajout_auteur = true;
+        }
+
+    }
+
+    return $ajout_auteur;
+
+}
+
+function check_if_auteur_exist(string $nom_auteur): bool  {
+
+    $check_if_auteur_exist = false;
+
+    if(isset($nom_auteur) && !empty($nom_auteur)){
+
+        $db = connect_db();
+
+        // Ecriture de la requête
+        $requette = 'SELECT count(*) as nbr_auteur FROM auteur WHERE nom_aut = :nom_aut;';
+
+        // Préparation
+        $verifier_auteur = $db->prepare($requette);
+
+        // Exécution ! La recette est maintenant en base de données
+        $resultat = $verifier_auteur->execute([
+            'nom_aut' => $nom_auteur
+        ]);
+
+        if ($resultat) {
+
+            $check_if_auteur_exist = ($verifier_auteur->fetch(PDO::FETCH_ASSOC)["nbr_auteur"] > 1) ? true : false;
+
+        }
+
+    }
+
+    return $check_if_auteur_exist;
+
 }
