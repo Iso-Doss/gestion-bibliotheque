@@ -214,6 +214,19 @@ function router()
                 include "auteurs/ajout-auteur-traitement.php";
                 break;
 
+            case "modifier-auteur":
+                include "auteurs/modifier-auteur.php";
+                break;
+
+            case "modifier-auteur-traitement":
+                    include "auteurs/modifier-auteur-traitement.php";
+                    break;
+                
+
+            case "supprimer-auteur":
+                include "auteurs/supprimer-auteur.php";
+                break;
+
             case "liste-domaines":
                 include "liste-domaines.php";
                 break;
@@ -299,5 +312,112 @@ function check_if_auteur_exist(string $nom_auteur): bool  {
     }
 
     return $check_if_auteur_exist;
+
+}
+
+/**
+ * Cette fonction permet de récupérer la liste des auteurs de la base de donnée.
+ * 
+ * @return array $liste_auteurs La liste des auteurs.
+ */
+function get_liste_auteurs(): array {
+
+    $liste_auteurs = array();
+
+    $db = connect_db();
+
+    // Ecriture de la requête
+    $requette = 'SELECT * FROM auteur';
+
+    // Préparation
+    $verifier_liste_auteurs = $db->prepare($requette);
+
+    // Exécution ! La recette est maintenant en base de données
+    $resultat = $verifier_liste_auteurs->execute();
+
+    if ($resultat) {
+
+        $liste_auteurs = $verifier_liste_auteurs->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+
+    return $liste_auteurs;
+
+}
+
+/**
+ * Cette fonction permet de récupérer un auteur via son numéro d'auteur.
+ * 
+ * @param int $num_auteur Le numéro de l'auteur.
+ * 
+ * @return array $auteur L'auteur.
+ */
+function get_auteur_by_num_auteur(int $num_auteur): array{
+
+    $auteur = array();
+
+    $db = connect_db();
+
+    // Ecriture de la requête
+    $requette = 'SELECT * FROM auteur WHERE num_aut = :num_aut ';
+
+    // Préparation
+    $verifier_auteur = $db->prepare($requette);
+
+    // Exécution ! La recette est maintenant en base de données
+    $resultat = $verifier_auteur->execute([
+        "num_aut" => $num_auteur
+    ]);
+
+    if ($resultat) {
+            
+        $auteur = $verifier_auteur->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+    return $auteur;
+
+}
+
+
+
+/**
+ * Cett fonction permet de modifier un auteur exitant dans la base de données via son numéro d'auteur.
+ * 
+ * @param int $num_auteur Le numéro de l'auteur.
+ * @param string $nom_auteur Le nom de l'auteur.
+ * 
+ * @return bool $modifier_auteur Le resultat de l'ajout de l'auteur.
+ */
+function modifier_auteur(int $num_auteur, string $nom_auteur): bool  {
+
+    $modifier_auteur = false;
+
+    if(isset($nom_auteur) && !empty($nom_auteur)){
+
+        $db = connect_db();
+
+        // Ecriture de la requête
+        $requette = 'UPDATE auteur SET nom_aut = :nom_aut WHERE num_aut = :num_aut;';
+
+        // Préparation
+        $modifier_auteur = $db->prepare($requette);
+
+        // Exécution ! La recette est maintenant en base de données
+        $resultat = $modifier_auteur->execute([
+            'nom_aut' => $nom_auteur,
+            'num_aut' => $num_auteur,
+        ]);
+
+        if ($resultat) {
+            
+            $modifier_auteur = true;
+
+        }
+
+    }
+
+    return $modifier_auteur;
 
 }
