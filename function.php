@@ -219,9 +219,9 @@ function router()
                 break;
 
             case "modifier-auteur-traitement":
-                    include "auteurs/modifier-auteur-traitement.php";
-                    break;
-                
+                include "auteurs/modifier-auteur-traitement.php";
+                break;
+
 
             case "supprimer-auteur":
                 include "auteurs/supprimer-auteur.php";
@@ -249,16 +249,17 @@ function router()
 
 /**
  * Cett fonction permet de d'ajouter un auteur a la base de données.
- * 
+ *
  * @param string $nom_auteur Le nom de l'auteur.
- * 
+ *
  * @return bool $ajout_auteur Le resultat de l'ajout de l'auteur.
  */
-function ajout_auteur(string $nom_auteur): bool  {
+function ajout_auteur(string $nom_auteur): bool
+{
 
     $ajout_auteur = false;
 
-    if(isset($nom_auteur) && !empty($nom_auteur)){
+    if (isset($nom_auteur) && !empty($nom_auteur)) {
 
         $db = connect_db();
 
@@ -284,11 +285,12 @@ function ajout_auteur(string $nom_auteur): bool  {
 
 }
 
-function check_if_auteur_exist(string $nom_auteur): bool  {
+function check_if_auteur_exist(string $nom_auteur): bool
+{
 
     $check_if_auteur_exist = false;
 
-    if(isset($nom_auteur) && !empty($nom_auteur)){
+    if (isset($nom_auteur) && !empty($nom_auteur)) {
 
         $db = connect_db();
 
@@ -317,10 +319,11 @@ function check_if_auteur_exist(string $nom_auteur): bool  {
 
 /**
  * Cette fonction permet de récupérer la liste des auteurs de la base de donnée.
- * 
+ *
  * @return array $liste_auteurs La liste des auteurs.
  */
-function get_liste_auteurs(): array {
+function get_liste_auteurs(): array
+{
 
     $liste_auteurs = array();
 
@@ -348,12 +351,13 @@ function get_liste_auteurs(): array {
 
 /**
  * Cette fonction permet de récupérer un auteur via son numéro d'auteur.
- * 
+ *
  * @param int $num_auteur Le numéro de l'auteur.
- * 
+ *
  * @return array $auteur L'auteur.
  */
-function get_auteur_by_num_auteur(int $num_auteur): array{
+function get_auteur_by_num_auteur(int $num_auteur): array
+{
 
     $auteur = array();
 
@@ -371,7 +375,7 @@ function get_auteur_by_num_auteur(int $num_auteur): array{
     ]);
 
     if ($resultat) {
-            
+
         $auteur = $verifier_auteur->fetchAll(PDO::FETCH_ASSOC);
 
     }
@@ -381,20 +385,20 @@ function get_auteur_by_num_auteur(int $num_auteur): array{
 }
 
 
-
 /**
  * Cett fonction permet de modifier un auteur exitant dans la base de données via son numéro d'auteur.
- * 
+ *
  * @param int $num_auteur Le numéro de l'auteur.
  * @param string $nom_auteur Le nom de l'auteur.
- * 
+ *
  * @return bool $modifier_auteur Le resultat de l'ajout de l'auteur.
  */
-function modifier_auteur(int $num_auteur, string $nom_auteur): bool  {
+function modifier_auteur(int $num_auteur, string $nom_auteur): bool
+{
 
     $modifier_auteur = false;
 
-    if(isset($nom_auteur) && !empty($nom_auteur)){
+    if (isset($nom_auteur) && !empty($nom_auteur)) {
 
         $db = connect_db();
 
@@ -411,7 +415,7 @@ function modifier_auteur(int $num_auteur, string $nom_auteur): bool  {
         ]);
 
         if ($resultat) {
-            
+
             $modifier_auteur = true;
 
         }

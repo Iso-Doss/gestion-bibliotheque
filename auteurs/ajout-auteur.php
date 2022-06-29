@@ -48,7 +48,7 @@
                             <input type="text" class="form-control" name="nom-auteur" id="nom-auteur"
                                    placeholder="Veuillez entrer le nom de l'auteur"
                                    value="<?= (isset($donnees["nom-auteur"]) && !empty($donnees["nom-auteur"])) ? $donnees["nom-auteur"] : ""; ?>"
-                                   >
+                            >
 
 
                             <span class="text-danger">

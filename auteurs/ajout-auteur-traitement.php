@@ -34,7 +34,7 @@ if (empty($erreurs)) {
 
         }
 
-    }else{
+    } else {
 
         $message["statut"] = 0;
         $message["message"] = "Oups! Le nom de ce auteur existe deja. Veuillez réesayer.";
