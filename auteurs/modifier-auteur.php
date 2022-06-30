@@ -37,7 +37,7 @@ if (isset($_GET["num-auteur"]) && !empty($_GET["num-auteur"])) {
             <div class="alert alert-danger" role="alert">
                 L'auteur que vous souhaitez modifier n'existe pas.
 
-                <a class="btn btn-info" href="?requette=liste-auteurs">Retour vers la liste des auteurs</a>
+                <a class="btn btn-default" href="?requette=liste-auteurs">Retour vers la liste des auteurs</a>
             </div>
             <?php
 

@@ -50,4 +50,4 @@ if (empty($erreurs)) {
 }
 
 
-header("location: connexion.php?erreurs=" . json_encode($erreurs) . "&donnees=" . json_encode($donnees) . "&message=" . json_encode($message_success));
+header("location: index.php?erreurs=" . json_encode($erreurs) . "&donnees=" . json_encode($donnees) . "&message=" . json_encode($message_success));

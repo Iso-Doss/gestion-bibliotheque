@@ -236,13 +236,13 @@ function router()
                 break;
 
             default:
-                include "default-dashboard.php";
+                include "auteurs/liste-auteurs.php";
                 break;
         }
 
     } else {
 
-        include "default-dashboard.php";
+        include "auteurs/liste-auteurs.php";
 
     }
 }
@@ -423,5 +423,44 @@ function modifier_auteur(int $num_auteur, string $nom_auteur): bool
     }
 
     return $modifier_auteur;
+
+}
+
+/**
+ * Cette fonction permet de supprimer un auteur de la base de données a partir de son numéro d'auteur.
+ * 
+ * @param int $num_auteur Le numéro de l'auteur.
+ * 
+ * @return bool $auteur_est_supprimer
+ * 
+ */
+function supprimer_auteur(int $num_auteur): bool{
+    
+    $auteur_est_supprimer = false;
+
+    if (isset($num_auteur) && !empty($num_auteur)) {
+
+        $db = connect_db();
+
+        // Ecriture de la requête
+        $requette = 'DELETE FROM auteur WHERE num_aut = :num_aut';
+
+        // Préparation
+        $supprimer_auteur = $db->prepare($requette);
+
+        // Exécution ! La recette est maintenant en base de données
+        $resultat = $supprimer_auteur->execute([
+            'num_aut' => $num_auteur,
+        ]);
+
+        if ($resultat) {
+
+            $auteur_est_supprimer = true;
+
+        }
+
+    }
+
+    return $auteur_est_supprimer;
 
 }

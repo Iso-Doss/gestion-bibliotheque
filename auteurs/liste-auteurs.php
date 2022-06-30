@@ -9,6 +9,9 @@ $liste_auteurs = get_liste_auteurs();
             <div class="col-sm-6">
                 <h1>Liste des auteurs</h1>
             </div>
+            <div class="col-sm-6 text-right">
+                <a href="?requette=ajout-auteur" class="btn btn-success">Ajouter un auteur</a>
+            </div>
         </div>
     </div>
 </section>

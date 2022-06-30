@@ -459,7 +459,7 @@ if ($user_connected) {
 
             </form>
 
-            <a href="connexion.php" class="text-center mt-3">J'ai deja un compte</a>
+            <a href="index.php" class="text-center mt-3">J'ai deja un compte</a>
 
         </div>
         <!-- /.form-box -->

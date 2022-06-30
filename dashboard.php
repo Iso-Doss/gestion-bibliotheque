@@ -5,7 +5,7 @@ include 'function.php';
 $user_connected = check_if_user_conneted();
 
 if (!$user_connected) {
-    header("location: connexion.php");
+    header("location: index.php");
 }
 
 ?>
@@ -23,6 +23,15 @@ if (!$user_connected) {
     <link rel="stylesheet" href="public/plugins/fontawesome-free/css/all.min.css">
 
     <link rel="stylesheet" href="public/css/adminlte.min.css?v=3.2.0">
+
+    <style>
+
+        .btn.btn-default{
+            color: black;
+            text-decoration: none;
+        }
+        
+    </style>
 
 </head>
 
@@ -113,6 +122,13 @@ if (!$user_connected) {
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                 </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="deconnexion.php">
+                    <i class="far fa-bell"></i>
+                </a>
+
             </li>
 
             <li class="nav-item dropdown">
